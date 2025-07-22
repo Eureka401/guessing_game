@@ -133,6 +133,48 @@ controller.start()
 
 ---
 
+## 🧪 Unit Testing
+
+Unit testing for the `GuessingGameModel` ensures that the logic behaves as expected across a wide range of inputs and edge cases. The tests focus on verifying the correct `Verdict`, maintaining internal state, and ensuring the game ends appropriately.
+
+### ✅ Test Strategy
+
+Each test typically:
+
+* Creates a model with known state (answer, attempts, range).
+* Makes a specific guess.
+* Asserts the resulting `Verdict`.
+* Verifies the internal state remains or updates correctly.
+
+### 🧪 Sample Test Cases
+
+```python
+from main import GuessingGameModel, Verdict
+
+def test_make_guess_more_than_max():
+    model = GuessingGameModel(10, 7, 1, 100)
+    verdict = model.make_guess(101)
+    assert verdict == Verdict.OUT_OF_BOUNDS
+    # ensure state unchanged
+    ...
+
+def test_make_guess_less_than_min():
+    ...
+
+def test_make_guess_less_than_answer():
+    ...
+
+def test_make_guess_greater_than_answer():
+    ...
+
+def test_make_guess_correct():
+    ...
+
+def test_make_guess_when_game_over():
+    ...
+```
+
+---
 ## 💡 Suggested Enhancements (Optional for Future Iteration)
 
 * Add difficulty levels that adjust attempt count.
