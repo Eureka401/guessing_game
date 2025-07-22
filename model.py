@@ -11,12 +11,23 @@ class Verdict(StrEnum):
 
 class GuessingGameModel:
     def __init__(self, answer: int, attempts_left: int, min_guess: int, max_guess: int) -> None:
-        self._answer = answer
-        self._attempts_left = attempts_left
-        self._min_guess = min_guess
-        self._max_guess = max_guess
-        self._is_game_over = False
-        self._did_player_win: bool | None = None
+        if attempts_left <= 0:
+            raise ValueError("attempts_left should be positive.")
+
+        elif min_guess > max_guess:
+            raise ValueError("min_guess should be less than max_guess.")
+
+        elif answer < min_guess or answer > max_guess:
+            raise ValueError(
+                "answer should be between or exactly min_guess and max_guess.")
+
+        else:
+            self._answer = answer
+            self._attempts_left = attempts_left
+            self._min_guess = min_guess
+            self._max_guess = max_guess
+            self._is_game_over = False
+            self._did_player_win: bool | None = None
 
     @property
     def answer(self):
